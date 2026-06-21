@@ -6,8 +6,6 @@
 #include <limits>
 using namespace std;
 
-// -------------------- Transaction Class --------------------
-// Encapsulation: data is private
 class Transaction {
 private:
     string type;
@@ -34,8 +32,6 @@ void printTransactionPrivate(const Transaction& t) {
          << ", Amount: " << t.amount << endl;
 }
 
-// -------------------- Account Class --------------------
-// Composition: Account has vector<Transaction>
 class Account {
 private:
     double income;
@@ -115,15 +111,12 @@ void showPrivateSummary(const Account& acc) {
     cout << "[Friend] Expenses total: " << acc.totalExpenses() << endl;
 }
 
-// -------------------- Abstraction --------------------
-// Abstract class
 class Report {
 public:
     virtual void generate(const Account& acc) const = 0;
     virtual ~Report() {}
 };
 
-// -------------------- Inheritance + Polymorphism --------------------
 class SummaryReport : public Report {
 public:
     void generate(const Account& acc) const override {
@@ -145,7 +138,6 @@ public:
     }
 };
 
-// -------------------- Analysis --------------------
 void showAnalysis(const Account& acc) {
     cout << "\n--- Analysis / Tahlil ---\n";
 
