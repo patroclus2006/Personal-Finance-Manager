@@ -1,6 +1,6 @@
 # Personal Finance Manager
 
-A C++ Object-Oriented Programming university project for managing personal finances.
+A C++ Programming university project for managing personal finances.
 
 ## abilitis
 - Budgeting
@@ -26,3 +26,4 @@ A C++ Object-Oriented Programming university project for managing personal finan
 ## Author
 Pouria Taqavi
 Computer Engineering Student of azad university
+thanks for your time teacher....(><)/
