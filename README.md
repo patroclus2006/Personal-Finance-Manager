@@ -5,7 +5,6 @@ A C++ Programming university project for managing personal finances.
 ## abilitis
 - Budgeting
 - Expense Tracking
-- Savings Goals
 - Net Worth Calculation
 - Financial Analysis
 - Financial Reports
@@ -13,13 +12,9 @@ A C++ Programming university project for managing personal finances.
 ## things i used in this project
 - Classes and Objects
 - Constructor
-- Destructor
-- Encapsulation
 - Abstraction
 - Inheritance
 - Polymorphism
-- Composition
-- Friend Function
 - Vector (STL)
 - File Handling
 
