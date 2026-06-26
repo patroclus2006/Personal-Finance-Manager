@@ -2,22 +2,21 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <limits>
-#include <iomanip>
+
 
 using namespace std;
 
-class Transaction{
+class traconesh{
 public:
     string type;
     double amount;
 
-    Transaction(){
+    traconesh(){
         type="x";
         amount=0;
     }
 
-    Transaction(string t,double a){
+    traconesh(string t,double a){
         type=t;
         amount=a;
     }
@@ -28,15 +27,16 @@ public:
 };
 
 
+
 class Account{
 public:
     double income;
-    vector<Transaction> exp;
-    double goal;
+    vector<traconesh> expense;
+ 
 
     Account(){
         income=0;
-        goal=0;
+       
     }
 
     Account(double i){
@@ -45,8 +45,8 @@ public:
 
     void add(string t,double a){
 
-        Transaction temp(t,a);
-        exp.push_back(temp);
+        traconesh temp(t,a);
+        expense.push_back(temp);
 
         ofstream f("data.txt",ios::app);
 
@@ -62,41 +62,41 @@ public:
         string t;
         double a;
 
-        exp.clear();
+        expense.clear();
 
         while(getline(f,t,',')){
             f>>a;
             f.ignore();
 
-            Transaction x(t,a);
-            exp.push_back(x);
+            traconesh x(t,a);
+            expense.push_back(x);
         }
     }
 
     double total(){
         double s=0;
-        for(int i=0;i<exp.size();i++){
-            s=s+exp[i].amount;
+        for(int i=0;i<expense.size();i++){
+            s=s+expense[i].amount;
         }
         return s;
     }
 
     double net(){
-        return income-total();
+    	double x = total();
+    	double y = income-x;
+    	
+        return y;
     }
 
     void print(){
-        for(int i=0;i<exp.size();i++){
-            exp[i].show();
+        for(int i=0;i<expense.size();i++){
+            expense[i].show();
         }
     }
 };
 
 
-void debug(Account a){
-    cout<<"income "<<a.income<<endl;
-    cout<<"total "<<a.total()<<endl;
-}
+
 
 
 class Report{
@@ -133,57 +133,63 @@ void analysis(Account a){
     double inc=a.income;
     double ex=a.total();
 
-    cout<<inc<<" inc\n";
-    cout<<ex<<" exp\n";
+    cout<<inc<<" income\n";
+    cout<<ex<<" expeense\n";
 
     if(inc!=0){
         cout<<(ex/inc)*100<<" %\n";
     }
 
-    debug(a);
+    
 
     if(inc-ex<0){
-        cout<<"BAD BAD BAD\n";
+           cout<<"BAD BAD BAD\n";
     }else{
-        cout<<"ok\n";
+        cout<<"good\n";
     }
 }
 
 
 
 int main(){
+ 		int code;
 
-    int code;
+  cout<<"enter your registery code please"<<endl;
+   cin>>code;
 
-    cout<<"code? ";
-    cin>>code;
-
-    if(code!=2585){
-        cout<<"wrong";
+	 if(code!=2585){
+        cout<<"wrong code sorry you cant log in ;)";
         return 0;
     }
 
-    double income;
-    char m;
+  	  double income;
+    char income_type;
 
-    cout<<"income: ";
+  	  cout<<"would you please enter your income: ";
+   		 cout<<"it can be monthly weekly and daily ";
     cin>>income;
 
-    cout<<"D W M ? ";
-    cin>>m;
+      cout<<"(please if your income is monthly enter 'M',if its weekly enter 'W' and if its daily enter 'D'and then press 'ENTER') ";
+    cin>>income_type;
 
-    double res=income;
+    double result=income;
 
-    if(m=='D'){
-        res=income*30;
-    }
-    if(m=='W'){
-        res=income*4;
-    }
+    if(income_type=='D' || income_type=='d'){
+    result = income * 30;
+			}
+	else if(income_type=='W' || income_type=='w'){
+    result = income * 4;
+		}
+	else if(income_type=='M' || income_type=='m'){
+    result = income;
+	}
+	else{
+    cout << "nvalid TYPE" << endl;
+	}
 
-    cout<<"res "<<res<<endl;
+     cout<<"your monthly income is  "<<result<<endl;
 
-    Account a(res);
+   	 Account a(result);
     a.load();
 
 
@@ -194,18 +200,18 @@ int main(){
         int c;
         cin>>c;
 
-        if(c==0){
+          if(c==0){
             break;
         }
 
-        if(c==1){
+         if(c==1){
             string t;
             double am;
 
-            cout<<"t? ";
+             cout<<"expense type? ";//type
             cin>>t;
 
-            cout<<"am? ";
+              cout<<"how much did you spend on it? ";//amount
             cin>>am;
 
             a.add(t,am);
@@ -215,7 +221,7 @@ int main(){
             a.print();
         }
 
-        if(c==3){
+    if(c==3){
             cout<<a.net()<<endl;
         }
 
@@ -226,7 +232,7 @@ int main(){
         if(c==5){
 
             int x;
-            cout<<"1 or 2 ";
+            cout<<"report v1[press 1] or report v2[press 2] ";
             cin>>x;
 
             Report* r;
@@ -239,11 +245,10 @@ int main(){
             }
 
             r->run(a);
+            delete r;
         }
 
-        if(c==999){
-            debug(a);
-        }
+    
     }
 
     return 0;
