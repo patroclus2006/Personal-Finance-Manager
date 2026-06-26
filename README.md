@@ -1,4 +1,4 @@
-# Personal Finance Manager
+# Personal Finance Manager(THIS "READ ME" IS AI GENERATED OSTAD )
 
 A C++ Programming university project for managing personal finances.
 
